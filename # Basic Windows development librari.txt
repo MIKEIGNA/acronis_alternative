@@ -1,0 +1,25 @@
+# Basic Windows development libraries
+pacman -S mingw-w64-x86_64-windows-default-manifest
+pacman -S mingw-w64-x86_64-winpthreads
+pacman -S mingw-w64-x86_64-winstorecompat
+
+# Volume Shadow Copy Service (VSS) development files
+pacman -S mingw-w64-x86_64-vss-sdk
+
+pacman -Ss vss-sdk
+
+# Additional useful system libraries
+pacman -S mingw-w64-x86_64-libarchive    # For handling various archive formats
+pacman -S mingw-w64-x86_64-boost         # Includes filesystem operations
+pacman -S mingw-w64-x86_64-crypto++      # For encryption if needed
+
+
+pacman -S mingw-w64-x86_64-ntldd         # For handling DLL dependencies
+pacman -S mingw-w64-x86_64-tools-git     # Additional Windows development tools
+
+
+pacman -S mingw-w64-x86_64-zlib-devel
+
+g++ system_backup.cpp -o system_backup.exe -lvssapi
+
+C++ program that uses Windows VSS (Volume Shadow Copy Service) to create a system image backup. This is a complex operation that requires administrator privileges.
