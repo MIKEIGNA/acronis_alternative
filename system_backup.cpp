@@ -334,13 +334,17 @@ static bool IsRunningAsAdmin() {
         SECURITY_BUILTIN_DOMAIN_RID,
         DOMAIN_ALIAS_RID_ADMINS, 0, 0, 0, 0, 0, 0, &adminGroup))
     {
-        std::cerr << "Failed to initialize SID: " << GetLastErrorAsString() << "\n";
+        // std::cerr << "Failed to initialize SID: " << GetLastErrorAsString() << "\n";
+        std::cerr << "Failed to initialize SID: " << std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(GetLastErrorAsString()) << "\n";
+
         return false;
     }
 
     if (!CheckTokenMembership(NULL, adminGroup, &isAdmin)) {
         FreeSid(adminGroup);
-        std::cerr << "Failed to check token membership: " << GetLastErrorAsString() << "\n";
+        // std::cerr << "Failed to check token membership: " << GetLastErrorAsString() << "\n";
+
+        std::cerr << "Failed to check token membership: " << std::wstring_convert<std::codecvt_utf8<wchar_t>>().to_bytes(GetLastErrorAsString()) << "\n";
         return false;
     }
 
