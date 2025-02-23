@@ -105,7 +105,7 @@ public:
         }
 
         VSS_ID snapshotId;
-        hr = backupComponents->AddToSnapshotSet(sourceDrive.c_str(), GUID_NULL, &snapshotId);
+        hr = backupComponents->AddToSnapshotSet((VSS_PWSZ)sourceDrive.c_str(), GUID_NULL, &snapshotId);
         if (FAILED(hr)) {
             LogError(logFile, L"Failed to add volume to snapshot set: 0x" + std::to_wstring(hr));
             return false;
