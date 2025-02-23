@@ -18,10 +18,7 @@ std::wstring GetTimestamp() {
     auto now = std::chrono::system_clock::now();
     auto now_c = std::chrono::system_clock::to_time_t(now);
     std::wstringstream ss;
-    // ss << std::put_time(std::localtime(&now_c), L"%Y%m%d_%H%M%S");
-    std::tm now_tm;
-    localtime_s(&now_tm, &now_c);
-    ss << std::put_time(&now_tm, L"%Y%m%d_%H%M%S");
+    ss << std::put_time(std::localtime(&now_c), L"%Y%m%d_%H%M%S");
     return ss.str();
 }
 
@@ -108,7 +105,7 @@ public:
         }
 
         VSS_ID snapshotId;
-        hr = backupComponents->AddToSnapshotSet((VSS_PWSZ)sourceDrive.c_str(), GUID_NULL, &snapshotId);
+        hr = backupComponents->AddToSnapshotSet(sourceDrive.c_str(), GUID_NULL, &snapshotId);
         if (FAILED(hr)) {
             LogError(logFile, L"Failed to add volume to snapshot set: 0x" + std::to_wstring(hr));
             return false;
